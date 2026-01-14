@@ -1,7 +1,9 @@
 package com.LNF_project.LNF.controller;
 
+import com.LNF_project.LNF.DTO.ItemUpdateDTO;
 import com.LNF_project.LNF.model.Item;
 import com.LNF_project.LNF.service.itemService;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,11 +50,16 @@ public class itemController {
         return ResponseEntity.noContent().build();
     }
 
-    @PatchMapping("/update/{id}")
+    @PatchMapping("/updateItem/{id}")
     public ResponseEntity<Item> updateInfo(@PathVariable Integer id, @RequestBody Map<String, Object> updates){
         Item itemUpdated = service.updateInfo(id, updates);
         return ResponseEntity.ok(itemUpdated);
 
+    }
+    @PatchMapping("/update/{id}")
+    public ResponseEntity<Item> updateInfo(@PathVariable Integer id, @RequestBody ItemUpdateDTO dto){
+        Item updatedItem = service.updateItem(id,dto);
+        return ResponseEntity.ok(updatedItem);
     }
 
 

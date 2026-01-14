@@ -1,5 +1,6 @@
 package com.LNF_project.LNF.service;
 
+import com.LNF_project.LNF.DTO.ItemUpdateDTO;
 import com.LNF_project.LNF.model.Item;
 import com.LNF_project.LNF.repository.itemRepo;
 import jakarta.persistence.EntityNotFoundException;
@@ -54,6 +55,24 @@ public class itemService {
 
         return itemRepo.save(item);
 
+    }
 
+    public Item updateItem(Integer id, ItemUpdateDTO dto){
+        Item item = itemRepo.findById(id).orElseThrow(()->new RuntimeException("Item not found"));
+
+        if(dto.getItemName()!=null){
+            item.setItemName(dto.getItemName());
+        }
+        if(dto.getDescription()!=null){
+            item.setDescription(dto.getDescription());
+        }
+        if(dto.getOwnerName()!=null){
+            item.setOwnerName(dto.getOwnerName());
+        }
+        if(dto.getContactNo()!=null){
+            item.setContactNo(dto.getContactNo());
+        }
+
+        return itemRepo.save(item);
     }
 }

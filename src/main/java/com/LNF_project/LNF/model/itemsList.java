@@ -14,6 +14,7 @@ public class itemsList {
     public void addItemToList(Item it) {
         Item item = new Item(it.getId(), it.getItemName(), it.getDescription(),it.getOwnerName(),it.isFound(), it.getContactNo());
         itemList.add(item);
+
     }
 
     @Override
