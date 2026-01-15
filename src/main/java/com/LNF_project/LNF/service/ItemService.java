@@ -1,51 +1,51 @@
 package com.LNF_project.LNF.service;
 
-import com.LNF_project.LNF.DTO.ItemUpdateDTO;
+import com.LNF_project.LNF.DTO.ItemUpdateDto;
 import com.LNF_project.LNF.model.Item;
-import com.LNF_project.LNF.repository.itemRepo;
+import com.LNF_project.LNF.repository.ItemRepository;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.servlet.Servlet;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
-public class itemService {
-    private final itemRepo itemRepo;
+public class ItemService {
+    private final ItemRepository itemRepository;
 
 
-    public itemService(itemRepo itemRepo, Item item, Servlet servlet){
-        this.itemRepo = itemRepo;
+    public ItemService(ItemRepository itemRepository){
+        this.itemRepository = itemRepository;
     }
 
     public Item save(Item item){
-        return itemRepo.save(item);
+        return itemRepository.save(item);
     }
 
     public List<Item> getAll(){
-        return itemRepo.findAll();
+        return itemRepository.findAll();
     }
 
-    public Optional<Item> getById(Integer id) {
-        return itemRepo.findById(id);
+    public Item getById(Integer id) {
+        return itemRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Item Not Found"));
     }
 
     public void deleteById(Integer id) {
-        if(!itemRepo.existsById(id)){
+        if(!itemRepository.existsById(id)){
             throw new EntityNotFoundException("Item not found");
         }
-        itemRepo.deleteById(id);
+        itemRepository.deleteById(id);
     }
-
+@Transactional
     public void updateFound(Integer id) {
-        Item item = itemRepo.findById(id).orElseThrow(() -> new RuntimeException("Item Not Found"));
+        Item item = itemRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Item Not Found"));
         item.setFound(true);
-        itemRepo.save(item);
+        itemRepository.save(item);
     }
-
+@Transactional
     public Item updateInfo(Integer id, Map<String, Object> updates) {
-        Item item = itemRepo.findById(id)
-                .orElseThrow(() -> new RuntimeException("Item not found"));
+        Item item = itemRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Item not found"));
         Set<String> allowedAttributes = Set.of("itemName","description", "ownerName","contactNo");
         updates.keySet().retainAll(allowedAttributes);
         if(updates.containsKey("itemName")) item.setItemName((String) updates.get("itemName"));
@@ -53,12 +53,13 @@ public class itemService {
         if(updates.containsKey("ownerName")) item.setOwnerName((String) updates.get("ownerName"));
         if(updates.containsKey("contactNo")) item.setContactNo((String) updates.get("contactNo"));
 
-        return itemRepo.save(item);
+//        return itemRepository.save(item); // if using transation@ then it can be skipped
+    return item;
 
     }
-
-    public Item updateItem(Integer id, ItemUpdateDTO dto){
-        Item item = itemRepo.findById(id).orElseThrow(()->new RuntimeException("Item not found"));
+@Transactional // to maintain ACID properties
+    public Item updateItem(Integer id, ItemUpdateDto dto){
+        Item item = itemRepository.findById(id).orElseThrow(()->new EntityNotFoundException("Item not found"));
 
         if(dto.getItemName()!=null){
             item.setItemName(dto.getItemName());
@@ -73,6 +74,6 @@ public class itemService {
             item.setContactNo(dto.getContactNo());
         }
 
-        return itemRepo.save(item);
+        return itemRepository.save(item);
     }
 }
