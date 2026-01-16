@@ -51,13 +51,13 @@ public class ItemController {
         return ResponseEntity.ok(new ApiResponse<>(true, "Updated Item Found Status", null));
     }
 
-    @PatchMapping("/updateItem/{id}")
-    public ResponseEntity<ApiResponse<Item>> updateInfo(@PathVariable Integer id, @RequestBody Map<String, Object> updates){
-        Item itemUpdated = service.updateInfo(id, updates);
-        return ResponseEntity.ok(new ApiResponse<>(true, "Item Updated Successfully", itemUpdated)); // with this data is sent back to client
+//    @PatchMapping("/updateItem/{id}")
+//    public ResponseEntity<ApiResponse<Item>> updateInfo(@PathVariable Integer id, @RequestBody Map<String, Object> updates){
+//        Item itemUpdated = service.updateInfo(id, updates);
+//        return ResponseEntity.ok(new ApiResponse<>(true, "Item Updated Successfully", itemUpdated)); // with this data is sent back to client
 
 //        return new ResponseEntity<Item>(HttpStatus.OK); // with this no data is sent to client empty body
-    }
+//    }
     @PatchMapping("/update/{id}")
     public ResponseEntity<ApiResponse<Item>> updateInfo(@PathVariable Integer id, @RequestBody ItemUpdateDto dto){
         Item updatedItem = service.updateItem(id,dto);

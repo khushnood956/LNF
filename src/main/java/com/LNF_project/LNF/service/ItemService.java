@@ -42,21 +42,21 @@ public class ItemService {
         item.setFound(true);
         itemRepository.save(item);
     }
-@Transactional
-    public Item updateInfo(Integer id, Map<String, Object> updates) {
-        Item item = itemRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Item not found"));
-        Set<String> allowedAttributes = Set.of("itemName","description", "ownerName","contactNo");
-        updates.keySet().retainAll(allowedAttributes);
-        if(updates.containsKey("itemName")) item.setItemName((String) updates.get("itemName"));
-        if(updates.containsKey("description")) item.setDescription((String) updates.get("description"));
-        if(updates.containsKey("ownerName")) item.setOwnerName((String) updates.get("ownerName"));
-        if(updates.containsKey("contactNo")) item.setContactNo((String) updates.get("contactNo"));
-
-//        return itemRepository.save(item); // if using transation@ then it can be skipped
-    return item;
-
-    }
+//@Transactional
+//    public Item updateInfo(Integer id, Map<String, Object> updates) {
+//        Item item = itemRepository.findById(id)
+//                .orElseThrow(() -> new EntityNotFoundException("Item not found"));
+//        Set<String> allowedAttributes = Set.of("itemName","description", "ownerName","contactNo");
+//        updates.keySet().retainAll(allowedAttributes);
+//        if(updates.containsKey("itemName")) item.setItemName((String) updates.get("itemName"));
+//        if(updates.containsKey("description")) item.setDescription((String) updates.get("description"));
+//        if(updates.containsKey("ownerName")) item.setOwnerName((String) updates.get("ownerName"));
+//        if(updates.containsKey("contactNo")) item.setContactNo((String) updates.get("contactNo"));
+//
+////        return itemRepository.save(item); // if using transation@ then it can be skipped
+//    return item;
+//
+//    }
 @Transactional // to maintain ACID properties
     public Item updateItem(Integer id, ItemUpdateDto dto){
         Item item = itemRepository.findById(id).orElseThrow(()->new EntityNotFoundException("Item not found"));
