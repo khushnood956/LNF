@@ -1,18 +1,23 @@
 # 🎒 University Lost & Found – Backend (Spring Boot)
 
-A personal backend project built with **Spring Boot** for managing a university **Lost & Found system**.  
-This project focuses on clean REST APIs, proper layering, and real-world backend practices.
+A personal **full‑stack learning project** starting with a strong **Spring Boot backend** and gradually moving towards a complete system with a basic **HTML/CSS frontend** and later JavaScript integration.
+
+This project focuses on clean REST APIs, proper layering, and real‑world backend practices while incrementally building frontend understanding.
 
 ---
 
 ## 🚀 Project Status
 **In Progress**  
-Backend APIs implemented for creating, viewing, updating, and deleting lost & found items.  
-Authentication, image uploads, and frontend are planned for later stages.
+- ✅ Core backend APIs completed  
+- ✅ Basic HTML/CSS frontend layout started (static UI, no JS logic yet)  
+- ⏳ JavaScript integration planned  
+- ⏳ Authentication & image uploads planned
 
 ---
 
 ## 🛠 Tech Stack
+
+### Backend
 - **Java**
 - **Spring Boot**
 - **Spring Web (REST APIs)**
@@ -22,9 +27,15 @@ Authentication, image uploads, and frontend are planned for later stages.
 - **Maven**
 - **Postman (API testing)**
 
+### Frontend (Current)
+- **HTML5**
+- **CSS3**
+
+> JavaScript and framework usage (React / Thymeleaf) will be decided later.
+
 ---
 
-## 📦 Features Implemented (Current)
+## 📦 Features Implemented (Backend)
 
 ### ✅ Item Management APIs
 - Add a new lost/found item
@@ -36,8 +47,20 @@ Authentication, image uploads, and frontend are planned for later stages.
 
 ---
 
+## 🎨 Frontend (Current Work)
+- Static pages for:
+  - Item listing layout
+  - Add item form (UI only)
+  - Basic responsive structure
+- Clean, minimal design focused on clarity
+
+> Frontend currently does **not** include JavaScript logic or API integration.
+
+---
+
 ## 🧱 Architecture
-Standard layered architecture:
+
+Standard layered backend architecture:
 
 ```
 Controller  →  Service  →  Repository  →  Database
@@ -114,6 +137,7 @@ PATCH /item/update/{id}
 - Debugging Spring Boot applications
 - Reading Hibernate SQL logs
 - Proper separation of concerns
+- Backend–Frontend responsibility separation
 
 ---
 
@@ -131,10 +155,12 @@ PATCH /item/update/{id}
 ---
 
 ## 🔮 Planned Features
+- JavaScript-based interactivity
+- REST API integration with frontend
 - Admin authentication panel
 - Image upload support (external storage)
-- Frontend (full-stack integration)
-- Validation & error response standardization
+- Validation & standardized error responses
+- Optional frontend framework integration
 
 ---
 
@@ -145,6 +171,6 @@ Personal learning & practice project
 ---
 
 ## 📌 Note
-This project is not intended as an FYP or production system.  
-It is a learning-focused project to understand real-world backend development.
+This project is **learning-focused**, not a production system or FYP.  
+The goal is to build strong backend fundamentals first and then grow confidently into frontend and full‑stack development.
 
