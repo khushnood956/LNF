@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Item - Lost & Found</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>🔍 Lost & Found</h1>
+            <p>University Item Recovery System</p>
+        </div>
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="add-item.html" class="active">Add Item</a>
+    </nav>
+
+    <main>
+        <section class="form-section">
+            <h2>Report an Item</h2>
+            <p class="form-subtitle">Fill out the form below to report a lost or found item</p>
+
+            <form class="item-form">
+                <div class="form-group">
+                    <label for="itemName">Item Name</label>
+                    <input type="text" id="itemName" name="itemName" placeholder="e.g. Blue Backpack" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" rows="4" placeholder="Describe the item in detail..." required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="ownerName">Your Name</label>
+                    <input type="text" id="ownerName" name="ownerName" placeholder="e.g. John Doe" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="contactNumber">Contact Number</label>
+                    <input type="tel" id="contactNumber" name="contactNumber" placeholder="e.g. 555-0123" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="e.g. john@university.edu" required>
+                </div>
+
+                <div class="form-group checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="isLost" name="isLost">
+                        <span>This item is LOST (uncheck if FOUND)</span>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label for="location">Location (where lost/found)</label>
+                    <input type="text" id="location" name="location" placeholder="e.g. Library, Building C, Cafeteria">
+                </div>
+
+                <div class="form-buttons">
+                    <button type="submit" class="btn-submit">Submit Report</button>
+                    <button type="reset" class="btn-reset">Clear Form</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 University Lost & Found System</p>
+    </footer>
+</body>
+</html>

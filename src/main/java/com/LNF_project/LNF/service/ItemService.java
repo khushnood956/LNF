@@ -60,7 +60,6 @@ public class ItemService {
 @Transactional // to maintain ACID properties
     public Item updateItem(Integer id, ItemUpdateDto dto){
         Item item = itemRepository.findById(id).orElseThrow(()->new EntityNotFoundException("Item not found"));
-
         if(dto.getItemName()!=null){
             item.setItemName(dto.getItemName());
         }
@@ -73,7 +72,6 @@ public class ItemService {
         if(dto.getContactNo()!=null){
             item.setContactNo(dto.getContactNo());
         }
-
         return itemRepository.save(item);
     }
 }
