@@ -140,7 +140,7 @@ export default function EditItem() {
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Item Name */}
             <div>
-              <label htmlFor="itemName" className="block text-sm font-semibold text-gray-700 mb-2">
+              <label htmlFor="itemName" className="block text-sm font-semibold text-gray-800 mb-2">
                 Item Name *
               </label>
               <input
@@ -150,8 +150,8 @@ export default function EditItem() {
                 value={formData.itemName}
                 onChange={handleChange}
                 disabled={submitting}
-                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all ${
-                  errors.itemName ? 'border-red-500' : 'border-gray-300'
+                className={`w-full px-4 py-3 font-semibold text-gray-800 mb-2 border rounded-lg focus:ring-2 focus:ring-gray-800 focus:border-transparent transition-all ${
+                  errors.itemName ? 'border-red-800' : 'border-gray-300'
                 }`}
                 placeholder="e.g., Wallet, Phone, Keys"
               />
@@ -170,7 +170,7 @@ export default function EditItem() {
                 onChange={handleChange}
                 disabled={submitting}
                 rows="4"
-                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all ${
+                className={`w-full px-4 py-3 font-semibold text-gray-800 mb-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all ${
                   errors.description ? 'border-red-500' : 'border-gray-300'
                 }`}
                 placeholder="Provide details about the item..."

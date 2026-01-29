@@ -72,6 +72,9 @@ public class ItemService {
         if(dto.getContactNo()!=null){
             item.setContactNo(dto.getContactNo());
         }
+        if(dto.getFound()!=null){
+            item.setFound(dto.getFound());
+        }
         return itemRepository.save(item);
     }
 }

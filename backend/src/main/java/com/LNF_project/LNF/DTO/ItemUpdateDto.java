@@ -8,6 +8,7 @@ public class ItemUpdateDto {
     private String description;
     private String ownerName;
     private String contactNo;
+    private Boolean found;
 }
 
 

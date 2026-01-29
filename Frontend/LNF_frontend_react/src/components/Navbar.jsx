@@ -8,7 +8,7 @@ export default function Navbar() {
           <Link to="/" className="group flex items-center gap-3">
             <div className="relative">
               <div className="absolute inset-0 bg-cyan-500 blur-xl opacity-50 group-hover:opacity-75 transition-opacity"></div>
-              <div className="relative text-4xl animate-float">🔍</div>
+              <div className="relative text-4xl animate-float">�</div>
             </div>
             <div>
               <h1 className="text-2xl font-black tracking-tight">

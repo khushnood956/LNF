@@ -12,12 +12,10 @@ import java.util.Map;
 
 @RestController
 @CrossOrigin
-
 @RequestMapping("/item")
 public class ItemController {
 
     private final ItemService service;
-
 
     public ItemController(ItemService service) {
         this.service = service;
@@ -32,7 +30,6 @@ public class ItemController {
     @GetMapping("/")
     public ResponseEntity<ApiResponse<List<Item>>> showAll() {
         return ResponseEntity.ok(new ApiResponse<>(true, "List Returned Successfully", service.getAll()));
-
     }
 
     @GetMapping("/show/{id}")
