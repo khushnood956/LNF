@@ -109,21 +109,21 @@ export default function EditItem() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-white flex items-center justify-center">
         <LoadingSpinner />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-white">
       {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
       
       <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Back Button */}
         <Link 
           to={`/item/${id}`}
-          className="inline-flex items-center text-indigo-600 hover:text-indigo-700 mb-6"
+          className="inline-flex items-center text-blue-600 hover:text-blue-700 mb-6 font-medium"
         >
           <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -132,15 +132,15 @@ export default function EditItem() {
         </Link>
 
         <div className="mb-8">
-          <h2 className="text-3xl font-bold text-gray-900 mb-2">Edit Item</h2>
-          <p className="text-gray-600">Update item details (only changed fields will be sent)</p>
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">Edit Item</h1>
+          <p className="text-gray-600">Update item details</p>
         </div>
 
-        <div className="bg-white rounded-xl shadow-md p-6 md:p-8">
+        <div className="card-base p-6 md:p-8">
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Item Name */}
             <div>
-              <label htmlFor="itemName" className="block text-sm font-semibold text-gray-800 mb-2">
+              <label htmlFor="itemName" className="block text-sm font-semibold text-gray-900 mb-2">
                 Item Name *
               </label>
               <input
@@ -150,8 +150,8 @@ export default function EditItem() {
                 value={formData.itemName}
                 onChange={handleChange}
                 disabled={submitting}
-                className={`w-full px-4 py-3 font-semibold text-gray-800 mb-2 border rounded-lg focus:ring-2 focus:ring-gray-800 focus:border-transparent transition-all ${
-                  errors.itemName ? 'border-red-800' : 'border-gray-300'
+                className={`w-full px-4 py-2 border rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${
+                  errors.itemName ? 'border-red-500' : 'border-gray-300'
                 }`}
                 placeholder="e.g., Wallet, Phone, Keys"
               />
@@ -160,7 +160,7 @@ export default function EditItem() {
 
             {/* Description */}
             <div>
-              <label htmlFor="description" className="block text-sm font-semibold text-gray-700 mb-2">
+              <label htmlFor="description" className="block text-sm font-semibold text-gray-900 mb-2">
                 Description *
               </label>
               <textarea
@@ -170,7 +170,7 @@ export default function EditItem() {
                 onChange={handleChange}
                 disabled={submitting}
                 rows="4"
-                className={`w-full px-4 py-3 font-semibold text-gray-800 mb-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all ${
+                className={`w-full px-4 py-2 border rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none ${
                   errors.description ? 'border-red-500' : 'border-gray-300'
                 }`}
                 placeholder="Provide details about the item..."
@@ -179,7 +179,7 @@ export default function EditItem() {
             </div>
 
             {/* Status Toggle */}
-            <div className="flex items-center space-x-3 bg-gray-50 p-4 rounded-lg">
+            <div className="flex items-center gap-3 p-4 bg-gray-50 border border-gray-200 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer">
               <input
                 type="checkbox"
                 id="found"
@@ -187,43 +187,36 @@ export default function EditItem() {
                 checked={formData.found}
                 onChange={handleChange}
                 disabled={submitting}
-                className="w-5 h-5 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
+                className="w-5 h-5 text-green-600 bg-white border-gray-300 rounded focus:ring-2 focus:ring-green-500 cursor-pointer"
               />
-              <label htmlFor="found" className="text-sm font-medium text-gray-700">
-                Mark as Found
+              <label htmlFor="found" className="text-sm font-medium text-gray-900 cursor-pointer">
+                ✓ Mark as Found
               </label>
             </div>
 
-            {/* Note about PATCH */}
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-              <p className="text-sm text-blue-800">
-                <strong>Note:</strong> Only modified fields will be sent to the server (PATCH request).
-              </p>
-            </div>
-
             {/* Non-editable fields info */}
-            <div className="bg-gray-50 rounded-lg p-4 space-y-2">
+            <div className="bg-gray-50 rounded-lg p-4 space-y-2 border border-gray-200">
               <p className="text-sm text-gray-600">
-                <strong>Owner:</strong> {originalItem?.ownerName} <span className="text-gray-400">(cannot be edited)</span>
+                <strong>Owner:</strong> {originalItem?.ownerName} <span className="text-gray-500">(read-only)</span>
               </p>
               <p className="text-sm text-gray-600">
-                <strong>Contact:</strong> {originalItem?.contactNo} <span className="text-gray-400">(cannot be edited)</span>
+                <strong>Contact:</strong> {originalItem?.contactNo} <span className="text-gray-500">(read-only)</span>
               </p>
             </div>
 
             {/* Action Buttons */}
-            <div className="flex space-x-4 pt-4">
+            <div className="flex gap-3 pt-4">
               <button
                 type="submit"
                 disabled={submitting}
-                className="flex-1 bg-indigo-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-indigo-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors duration-200"
+                className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
               >
                 {submitting ? 'Updating...' : 'Update Item'}
               </button>
               
               <Link
                 to={`/item/${id}`}
-                className="px-6 py-3 border border-gray-300 rounded-lg font-semibold text-gray-700 hover:bg-gray-50 transition-colors duration-200 text-center"
+                className="px-4 py-2 border border-gray-300 rounded-lg font-medium text-gray-700 hover:bg-gray-50 transition-colors text-center"
               >
                 Cancel
               </Link>

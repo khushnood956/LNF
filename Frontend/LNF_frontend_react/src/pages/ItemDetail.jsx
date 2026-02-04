@@ -71,7 +71,7 @@ export default function ItemDetail() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-white flex items-center justify-center">
         <LoadingSpinner />
       </div>
     );
@@ -79,20 +79,21 @@ export default function ItemDetail() {
 
   if (!item) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Item not found</h2>
-          <Link to="/" className="text-indigo-600 hover:underline">Go back to home</Link>
+          <Link to="/" className="text-blue-600 hover:underline">Go back to home</Link>
         </div>
       </div>
     );
   }
 
-  const statusColor = item.found ? 'bg-green-100 text-green-800' : 'bg-orange-100 text-orange-800';
+  const statusBg = item.found ? 'bg-green-50' : 'bg-orange-50';
+  const statusColor = item.found ? 'text-green-700' : 'text-orange-700';
   const statusText = item.found ? 'Found' : 'Lost';
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-white">
       {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
       
       <ConfirmModal
@@ -108,40 +109,40 @@ export default function ItemDetail() {
         {/* Back Button */}
         <Link 
           to="/" 
-          className="inline-flex items-center text-indigo-600 hover:text-indigo-700 mb-6"
+          className="inline-flex items-center text-blue-600 hover:text-blue-700 mb-6 font-medium"
         >
           <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
-          Back to Dashboard
+          Back to Home
         </Link>
 
         {/* Item Detail Card */}
-        <div className="bg-white rounded-xl shadow-lg p-6 md:p-8">
+        <div className="card-base p-6 md:p-8">
           {/* Header with Status */}
-          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-6">
-            <div className="flex-1 mb-4 sm:mb-0">
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">{item.itemName}</h1>
-              <span className={`${statusColor} inline-block px-4 py-2 rounded-full text-sm font-semibold uppercase`}>
+          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-6 pb-6 border-b border-gray-100">
+            <div className="flex-1">
+              <h1 className="text-3xl font-bold text-gray-900 mb-3">{item.itemName}</h1>
+              <span className={`${statusBg} ${statusColor} inline-block px-3 py-1 rounded-full text-xs font-semibold`}>
                 {statusText}
               </span>
             </div>
           </div>
 
           {/* Description */}
-          <div className="mb-6 pb-6 border-b border-gray-200">
-            <h2 className="text-lg font-semibold text-gray-700 mb-2">Description</h2>
-            <p className="text-gray-600 whitespace-pre-wrap">{item.description}</p>
+          <div className="mb-6 pb-6 border-b border-gray-100">
+            <h2 className="text-sm font-semibold text-gray-700 mb-2">Description</h2>
+            <p className="text-gray-600 leading-relaxed">{item.description}</p>
           </div>
 
           {/* Contact Information */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             <div>
-              <h3 className="text-sm font-semibold text-gray-500 uppercase mb-2">Owner Name</h3>
+              <h3 className="text-xs font-semibold text-gray-500 uppercase mb-1">Owner Name</h3>
               <p className="text-lg text-gray-900">{item.ownerName}</p>
             </div>
             <div>
-              <h3 className="text-sm font-semibold text-gray-500 uppercase mb-2">Contact Number</h3>
+              <h3 className="text-xs font-semibold text-gray-500 uppercase mb-1">Contact Number</h3>
               <p className="text-lg text-gray-900">{item.contactNo}</p>
             </div>
           </div>
@@ -151,14 +152,14 @@ export default function ItemDetail() {
             <button
               onClick={handleToggleStatus}
               disabled={actionLoading}
-              className="flex-1 bg-indigo-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-indigo-700 disabled:bg-gray-400 transition-colors duration-200"
+              className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-blue-700 disabled:opacity-50 transition-all"
             >
               {actionLoading ? 'Updating...' : `Mark as ${item.found ? 'Lost' : 'Found'}`}
             </button>
             
             <Link
               to={`/edit/${item.id}`}
-              className="flex-1 bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-200 text-center"
+              className="flex-1 bg-gray-100 text-gray-900 py-2 px-4 rounded-lg font-medium hover:bg-gray-200 transition-colors text-center"
             >
               Edit Item
             </Link>
@@ -166,7 +167,7 @@ export default function ItemDetail() {
             <button
               onClick={() => setShowDeleteModal(true)}
               disabled={actionLoading}
-              className="sm:flex-initial px-6 py-3 bg-red-600 text-white rounded-lg font-semibold hover:bg-red-700 disabled:bg-gray-400 transition-colors duration-200"
+              className="sm:flex-initial px-4 py-2 bg-red-100 text-red-700 rounded-lg font-medium hover:bg-red-200 disabled:opacity-50 transition-all"
             >
               Delete
             </button>

@@ -37,57 +37,38 @@ export default function Home() {
   });
 
   const filterButtons = [
-    { key: 'all', label: 'All', count: items.length },
+    { key: 'all', label: 'All Items', count: items.length },
     { key: 'found', label: 'Found', count: items.filter(i => i.found).length },
     { key: 'lost', label: 'Lost', count: items.filter(i => !i.found).length },
   ];
 
   return (
-    <div className="min-h-screen bg-zinc-950">
+    <div className="min-h-screen bg-white">
       {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header */}
-        <div className="mb-12 text-center">
-          <div className="inline-block mb-4">
-            <div className="text-6xl mb-4 animate-float">🔍</div>
-          </div>
-          <h2 className="text-5xl font-black tracking-tight mb-4">
-            <span className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-              Item Tracker
-            </span>
-          </h2>
-          <p className="text-zinc-400 text-lg">Discover what's been lost and found</p>
+        <div className="mb-10 text-center">
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">Lost & Found Items</h1>
+          <p className="text-gray-600">Help find lost items or report found items</p>
         </div>
 
-        {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          {filterButtons.map((btn, index) => {
-            const gradients = {
-              all: 'from-purple-500 to-pink-500',
-              found: 'from-emerald-500 to-cyan-500',
-              lost: 'from-amber-500 to-orange-500'
-            };
+        {/* Filter Buttons */}
+        <div className="flex flex-wrap gap-3 mb-10 justify-center">
+          {filterButtons.map(btn => {
             const isActive = filter === btn.key;
-            
             return (
               <button
                 key={btn.key}
                 onClick={() => setFilter(btn.key)}
-                className={`group relative p-6 rounded-2xl transition-all duration-300 ${
-                  isActive ? 'scale-105' : 'hover:scale-105'
+                className={`px-4 py-2 rounded-lg font-medium text-sm transition-all ${
+                  isActive
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
                 }`}
-                style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className={`absolute inset-0 bg-gradient-to-br ${gradients[btn.key]} rounded-2xl blur opacity-40 group-hover:opacity-60 transition-opacity`}></div>
-                <div className={`relative bg-zinc-900 border rounded-2xl p-6 ${
-                  isActive ? 'border-transparent' : 'border-zinc-800'
-                }`}>
-                  <div className="text-4xl font-black text-white mb-2">{btn.count}</div>
-                  <div className="text-sm font-bold tracking-widest uppercase text-zinc-400">
-                    {btn.label} Items
-                  </div>
-                </div>
+                {btn.label}
+                <span className="ml-2 font-semibold text-xs">({btn.count})</span>
               </button>
             );
           })}
@@ -98,32 +79,27 @@ export default function Home() {
 
         {/* Empty State */}
         {!loading && filteredItems.length === 0 && (
-          <div className="text-center py-20">
-            <div className="relative inline-block mb-8">
-              <div className="absolute inset-0 bg-cyan-500 blur-3xl opacity-30 animate-glow"></div>
-              <div className="relative text-8xl">📦</div>
-            </div>
-            <h3 className="text-3xl font-bold text-white mb-3">
-              Nothing to see here
-            </h3>
-            <p className="text-zinc-400 mb-8 text-lg">
+          <div className="text-center py-16">
+            <div className="text-6xl mb-4">📦</div>
+            <h3 className="text-2xl font-bold text-gray-900 mb-2">No items found</h3>
+            <p className="text-gray-600 mb-6">
               {filter === 'lost' && 'No lost items reported yet'}
               {filter === 'found' && 'No found items reported yet'}
               {filter === 'all' && 'Be the first to report an item'}
             </p>
             <Link
               to="/add"
-              className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-purple-500 hover:to-cyan-500 rounded-xl font-bold text-lg transition-all duration-300 shadow-lg hover:shadow-cyan-500/50"
+              className="inline-flex items-center gap-2 px-6 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors"
             >
-              <span className="text-2xl">+</span>
-              <span>ADD FIRST ITEM</span>
+              <span>+</span>
+              <span>Add Item</span>
             </Link>
           </div>
         )}
 
         {/* Items Grid */}
         {!loading && filteredItems.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredItems.map(item => (
               <ItemCard key={item.id} item={item} />
             ))}
@@ -134,7 +110,7 @@ export default function Home() {
       {/* Mobile Floating Action Button */}
       <Link
         to="/add"
-        className="md:hidden fixed bottom-8 right-8 w-16 h-16 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full shadow-2xl flex items-center justify-center text-3xl hover:scale-110 transition-transform duration-300 z-50 animate-glow"
+        className="md:hidden fixed bottom-8 right-8 w-14 h-14 bg-blue-600 text-white rounded-full shadow-lg-soft flex items-center justify-center text-2xl hover:scale-110 transition-transform z-50"
       >
         +
       </Link>
